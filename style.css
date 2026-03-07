@@ -1,86 +1,39 @@
 :root {
-    --soft-pink: #fce4ec;
-    --deep-pink: #f06292;
-    --soft-blue: #e3f2fd;
-    --elegant-blue: #1e88e5;
-    --text-dark: #333;
+    --pink: #F8BBD0;
+    --dark-pink: #E91E63;
+    --blue: #E3F2FD;
+    --deep-blue: #1976D2;
+    --white: #ffffff;
+    --text: #444;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    color: var(--text-dark);
-    background-color: var(--soft-blue);
-    scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; color: var(--text); background-color: var(--blue); scroll-behavior: smooth; }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--white); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; color: var(--dark-pink); }
+.nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); font-weight: 600; }
 
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--deep-pink);
-}
+.hero { height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(248,187,208,0.5), rgba(248,187,208,0.5)), url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=1500'); background-size: cover; }
+.btn-primary { background: var(--dark-pink); color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px; }
 
-nav ul { display: flex; list-style: none; }
-nav ul li { margin-left: 20px; }
-nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; }
+.section { padding: 50px 10%; }
+.text-center { text-align: center; margin-bottom: 30px; }
 
-.hero-content {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('image/hero-bg.jpg');
-    background-size: cover;
-}
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.product-card { background: white; padding: 15px; border-radius: 15px; text-align: center; transition: 0.3s; cursor: pointer; }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.product-card img { width: 100%; border-radius: 10px; height: 250px; object-fit: cover; }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 5%;
-}
+.video-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; }
+.video-scroll iframe { min-width: 300px; height: 500px; border-radius: 15px; }
 
-.product-card {
-    background: #fff;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
+.analysis-box { background: var(--white); border-radius: 20px; text-align: center; margin: 20px 10%; }
+.result-display { margin-top: 20px; padding: 15px; border-radius: 10px; background: var(--blue); display: none; }
 
-.product-card:hover { transform: translateY(-10px); }
-.product-card img { width: 100%; border-radius: 10px; }
+footer { background: white; padding: 40px 10%; text-align: center; border-top: 5px solid var(--pink); }
+.wa-btn { color: #25D366; font-weight: bold; text-decoration: none; }
 
-.video-wrapper {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 20px;
-}
-
-.video-wrapper iframe {
-    min-width: 300px;
-    height: 500px;
-    border-radius: 15px;
-}
-
-/* Responsive Mobile */
 @media (max-width: 768px) {
-    nav ul { display: none; } /* Perlu ditambahkan menu hamburger di JS */
-    .hero-content h1 { font-size: 2rem; }
+    .nav-links { display: none; }
 }
