@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk | Heavenly Wear</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .product-container { display: flex; flex-wrap: wrap; padding: 50px 10%; gap: 50px; background: #fff; }
+        .product-image img { width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .product-info { flex: 1; min-width: 300px; }
+        .color-options { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .color-dot { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        .color-dot:hover, .selected-color { border-color: var(--deep-pink); transform: scale(1.1); }
+        .qty-input { width: 60px; padding: 8px; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 20px; }
+        .btn-group { display: flex; gap: 15px; }
+        .btn-buy { background: var(--deep-pink); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; }
+        .btn-cart { background: var(--elegant-blue); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; }
+        .reviews { margin-top: 50px; padding: 20px; background: var(--soft-pink); border-radius: 15px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">Heavenly Wear</div>
+        <a href="cart.html" style="text-decoration: none;">🛒 Keranjang</a>
+    </nav>
+
+    <div class="product-container">
+        <div class="product-image">
+            <img id="mainImage" src="image/segiempat-voal.jpeg" alt="Hijab">
+        </div>
+        <div class="product-info">
+            <h1 id="prodName">Hijab Segi Empat Voal</h1>
+            <h2 id="prodPrice" style="color: var(--deep-pink);">Rp 35.000</h2>
+            <p><strong>Deskripsi Rinci:</strong><br>
+                Terbuat dari bahan Ultra Fine Voal premium yang sangat lembut, tegak di dahi, dan tidak pekak di telinga. 
+                Memiliki tekstur serat yang rapat namun tetap breathable, cocok untuk penggunaan formal maupun harian. 
+                Finishing lasercut yang rapi menambah kesan mewah dan elegan.
+            </p>
+            
+            <p><strong>Pilih Warna (Tersedia 20+ Warna):</strong></p>
+            <div class="color-options" id="colorList">
+                </div>
+            
+            <p>Jumlah:</p>
+            <input type="number" id="qty" class="qty-input" value="1" min="1">
+            
+            <div class="btn-group">
+                <button class="btn-cart" onclick="addToCart()">Tambah ke Keranjang</button>
+                <button class="btn-buy" onclick="buyNow()">Beli Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="reviews" style="margin: 20px 10%;">
+        <h3>Ulasan Pelanggan (4.9/5.0)</h3>
+        <hr>
+        <p>⭐ "Bahannya adem banget, warnanya sesuai foto! Pengiriman cepat." - <strong>Siti A.</strong></p>
+        <p>⭐ "Udah koleksi 5 warna, semuanya cantik-cantik. Recomended!" - <strong>Putri K.</strong></p>
+    </section>
+
+    <script>
+        // Simulasi data warna yang sangat banyak
+        const colors = ['Dusty Pink', 'Navy', 'Maroon', 'Sage Green', 'Beige', 'Black', 'Milo', 'Silver', 'Lilac', 'Terracotta'];
+        const colorList = document.getElementById('colorList');
+        let selectedColor = "";
+
+        colors.forEach(c => {
+            const dot = document.createElement('div');
+            dot.className = 'color-dot';
+            dot.style.backgroundColor = c.toLowerCase().replace(' ', '');
+            dot.title = c;
+            dot.onclick = () => {
+                document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected-color'));
+                dot.classList.add('selected-color');
+                selectedColor = c;
+            };
+            colorList.appendChild(dot);
+        });
+
+        function addToCart() {
+            if(!selectedColor) return alert("Pilih warna dulu ya ukh!");
+            let cart = JSON.parse(localStorage.getItem('heavenlyCart')) || [];
+            cart.push({
+                name: document.getElementById('prodName').innerText,
+                price: 35000,
+                color: selectedColor,
+                qty: document.getElementById('qty').value,
+                img: document.getElementById('mainImage').src
+            });
+            localStorage.setItem('heavenlyCart', JSON.stringify(cart));
+            alert("Berhasil masuk keranjang!");
+        }
+
+        function buyNow() {
+            addToCart();
+            window.location.href = 'cart.html';
+        }
+    </script>
+</body>
+</html>
