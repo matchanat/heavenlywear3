@@ -1,0 +1,86 @@
+:root {
+    --soft-pink: #fce4ec;
+    --deep-pink: #f06292;
+    --soft-blue: #e3f2fd;
+    --elegant-blue: #1e88e5;
+    --text-dark: #333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: var(--text-dark);
+    background-color: var(--soft-blue);
+    scroll-behavior: smooth;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep-pink);
+}
+
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 20px; }
+nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; }
+
+.hero-content {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('image/hero-bg.jpg');
+    background-size: cover;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 5%;
+}
+
+.product-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.product-card:hover { transform: translateY(-10px); }
+.product-card img { width: 100%; border-radius: 10px; }
+
+.video-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+.video-wrapper iframe {
+    min-width: 300px;
+    height: 500px;
+    border-radius: 15px;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    nav ul { display: none; } /* Perlu ditambahkan menu hamburger di JS */
+    .hero-content h1 { font-size: 2rem; }
+}
