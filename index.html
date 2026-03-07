@@ -6,80 +6,70 @@
     <title>Heavenly Wear | Elegan & Modern Hijab</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <nav>
         <div class="logo">Heavenly Wear</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#catalog">Katalog</a></li>
-            <li><a href="#recommendation">Rekomendasi</a></li>
-            <li><a href="#tutorial">Tutorial</a></li>
-            <li><a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a></li>
-        </ul>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#catalog">Katalog</a>
+            <a href="#analysis">AI Rekomendasi</a>
+            <a href="cart.html" class="cart-btn">🛒 <span id="cart-count">0</span></a>
+        </div>
     </nav>
 
-    <header id="home">
-        <div class="hero-content">
-            <h1>Sempurnakan Hijrahmu dengan Keanggunan</h1>
-            <p>Hijab bukan sekadar kain, ia adalah identitas dan kemuliaan seorang wanita muslimah.</p>
-            <button onclick="location.href='#catalog'">Belanja Sekarang</button>
+    <header id="home" class="hero">
+        <div class="hero-text">
+            <h1>Sempurnakan Hijrahmu</h1>
+            <p>Hijab adalah mahkota setiap muslimah. Temukan kenyamanan dalam balutan bahan premium kami.</p>
+            <a href="#catalog" class="btn-primary">Lihat Koleksi</a>
         </div>
     </header>
 
-    <section id="ai-analysis" class="section">
-        <h2>Rekomendasi Otomatis (AI Face Analysis)</h2>
-        <p>Unggah foto Anda untuk mendapatkan rekomendasi jenis hijab dan warna terbaik.</p>
-        <div class="upload-container">
-            <input type="file" id="imageUpload" accept="image/*">
-            <div id="analysisResult" class="result-box"></div>
+    <section class="section education">
+        <h2>Mengapa Berhijab?</h2>
+        <p>Hijab bukan sekadar penutup kepala, ia adalah bentuk ketaatan, perlindungan diri, dan ekspresi kehormatan seorang wanita. Mari mulai langkah kecilmu untuk menutup aurat dengan anggun.</p>
+        <div class="types-grid">
+            <div class="type-card"><h3>Voal</h3><p>Ringan & mudah dibentuk.</p></div>
+            <div class="type-card"><h3>Ceruty</h3><p>Jatuh & mewah untuk pesta.</p></div>
+            <div class="type-card"><h3>Viscose</h3><p>Adem & tekstur unik.</p></div>
+        </div>
+    </section>
+
+    <section id="analysis" class="section analysis-box">
+        <h2>AI Personal Stylist</h2>
+        <p>Unggah foto Anda untuk analisis bentuk wajah dan undertone otomatis.</p>
+        <div class="upload-area">
+            <input type="file" id="faceInput" accept="image/*">
+            <button class="btn-secondary" onclick="analyzeFace()">Mulai Analisis</button>
+            <div id="aiResult" class="result-display"></div>
         </div>
     </section>
 
     <section id="catalog" class="section">
-        <h2>Katalog Koleksi Kami</h2>
-        <div class="product-grid">
-            <div class="product-card" onclick="openProduct('sport')">
-                <img src="image/hijab-sport.jpeg" alt="Hijab Sport">
-                <h3>Hijab Sport</h3>
-                <p class="price">Rp 40.000</p>
+        <h2 class="text-center">Koleksi Katalog</h2>
+        <div class="product-grid" id="productGrid">
             </div>
-            <div class="product-card" onclick="openProduct('voal')">
-                <img src="image/segiempat-voal.jpeg" alt="Segi Empat Voal">
-                <h3>Hijab Segi Empat Voal</h3>
-                <p class="price">Rp 35.000</p>
-            </div>
-            <div class="product-card" onclick="openProduct('viscose')">
-                <img src="image/pashmina-viscose.jpeg" alt="Pashmina Viscose">
-                <h3>Pashmina Viscose</h3>
-                <p class="price">Rp 45.000</p>
-            </div>
-            <div class="product-card" onclick="openProduct('ceruty')">
-                <img src="image/pashmina-ceruty.jpeg" alt="Pashmina Ceruty">
-                <h3>Pashmina Ceruty</h3>
-                <p class="price">Rp 42.000</p>
-            </div>
-        </div>
     </section>
 
-    <section id="tutorial" class="section">
-        <h2>Tutorial Hijab Edukatif</h2>
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/H2ev9kX3CYA" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/-SkMvc0muLY" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/WzKlSFJDISA" frameborder="0" allowfullscreen></iframe>
+    <section class="section">
+        <h2>Tutorial & Edukasi</h2>
+        <div class="video-scroll">
+            <iframe src="https://www.youtube.com/embed/H2ev9kX3CYA" frameborder="0"></iframe>
+            <iframe src="https://www.youtube.com/embed/-SkMvc0muLY" frameborder="0"></iframe>
+            <iframe src="https://www.youtube.com/embed/WzKlSFJDISA" frameborder="0"></iframe>
         </div>
     </section>
 
     <footer>
-        <div class="social-links">
-            <a href="https://instagram.com/heavenlywear">Instagram</a> | 
-            <a href="https://tiktok.com/@heavenlywear">TikTok</a> | 
-            <a href="https://wa.me/628123456789">Konsultasi WA</a>
+        <div class="footer-content">
+            <p>Butuh bantuan? <a href="https://wa.me/628123456789" class="wa-btn">Chat Admin (WA)</a></p>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+            </div>
         </div>
-        <p>&copy; 2024 Heavenly Wear. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
