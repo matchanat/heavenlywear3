@@ -3,106 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keranjang Belanja | Heavenly Wear</title>
+    <title>Checkout | Heavenly Wear</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        .cart-page { padding: 40px 10%; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-        .cart-item { display: flex; align-items: center; background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .cart-item img { width: 80px; border-radius: 5px; margin-right: 20px; }
-        .summary-box { background: #fff; padding: 20px; border-radius: 15px; height: fit-content; border: 1px solid var(--soft-pink); }
-        .checkout-btn { width: 100%; padding: 15px; background: var(--deep-pink); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        @media (max-width: 768px) { .cart-page { grid-template-columns: 1fr; } }
-    </style>
 </head>
 <body>
-
-    <nav>
-        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">Heavenly Wear</div>
-    </nav>
-
-    <div class="cart-page">
-        <div id="cartList">
-            <h2>Keranjang Anda</h2>
-            </div>
-
-        <div class="summary-box">
+    <nav class="navbar"><div class="logo" onclick="location.href='index.html'">Heavenly Wear</div></nav>
+    <div class="container" style="padding: 50px 0;">
+        <h1>Shopping Cart</h1>
+        <div id="cartItems"></div>
+        <div id="checkoutForm" style="margin-top: 40px; background: #f9f9f9; padding: 30px; border-radius: 20px;">
             <h3>Rincian Pembayaran</h3>
-            <p>Total Produk: <span id="subtotal">Rp 0</span></p>
-            
-            <label>Opsi Pengiriman:</label>
-            <select id="shipping" onchange="calculateTotal()">
-                <option value="10000">Reguler (Rp 10.000)</option>
-                <option value="20000">Ekspres (Rp 20.000)</option>
-                <option value="0">Ambil di Toko (Rp 0)</option>
-            </select>
-
-            <label>Metode Pembayaran:</label>
-            <select id="payment">
-                <option>Transfer Bank (BCA/Mandiri)</option>
-                <option>E-Wallet (Gopay/ShopeePay)</option>
-                <option>COD (Bayar di Tempat)</option>
-            </select>
-
+            <p>Subtotal: <span id="subTotal"></span></p>
+            <p>Ongkir: 
+                <select id="ongkir" onchange="calcTotal()">
+                    <option value="10000">Reguler (10.000)</option>
+                    <option value="25000">Kilat (25.000)</option>
+                </select>
+            </p>
+            <p>Metode Pembayaran: 
+                <select id="payment">
+                    <option>Bank Transfer (BCA)</option>
+                    <option>Gopay / ShopeePay</option>
+                </select>
+            </p>
             <hr>
-            <h4>Total Bayar: <span id="grandTotal" style="color: var(--deep-pink);">Rp 0</span></h4>
-            
-            <button class="checkout-btn" onclick="confirmPurchase()">BAYAR SEKARANG</button>
+            <h2>Total Bayar: <span id="totalBayar" style="color: #F06292;"></span></h2>
+            <button onclick="finalOrder()" class="btn-primary" style="width: 100%; margin-top: 20px;">Konfirmasi Pesanan Sekarang</button>
         </div>
     </div>
 
     <script>
         function renderCart() {
             const cart = JSON.parse(localStorage.getItem('heavenlyCart')) || [];
-            const container = document.getElementById('cartList');
-            let subtotal = 0;
+            const cont = document.getElementById('cartItems');
+            let sub = 0;
 
-            if(cart.length === 0) {
-                container.innerHTML = "<p>Keranjang masih kosong.</p>";
-                return;
-            }
-
-            container.innerHTML = "<h2>Keranjang Anda</h2>";
-            cart.forEach((item, index) => {
-                subtotal += (item.price * item.qty);
-                container.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.img}">
-                        <div style="flex:1">
-                            <h4>${item.name}</h4>
-                            <p>Warna: ${item.color} | Jml: ${item.qty}</p>
-                            <p>Rp ${item.price.toLocaleString()}</p>
-                        </div>
-                        <button onclick="removeItem(${index})" style="color:red; border:none; background:none; cursor:pointer">Hapus</button>
-                    </div>
-                `;
-            });
+            cont.innerHTML = cart.map((item, i) => {
+                sub += (item.price * item.qty);
+                return `<div style="display:flex; justify-content:space-between; padding:20px; background:white; margin-bottom:10px; border-radius:15px;">
+                    <div><b>${item.name}</b> (${item.color}) x ${item.qty}</div>
+                    <div>Rp ${(item.price * item.qty).toLocaleString()}</div>
+                    <button onclick="delItem(${i})" style="color:red; border:none; background:none; cursor:pointer">Hapus</button>
+                </div>`;
+            }).join('');
             
-            document.getElementById('subtotal').innerText = "Rp " + subtotal.toLocaleString();
-            calculateTotal();
+            document.getElementById('subTotal').innerText = "Rp " + sub.toLocaleString();
+            localStorage.setItem('tempSub', sub);
+            calcTotal();
         }
 
-        function calculateTotal() {
-            const cart = JSON.parse(localStorage.getItem('heavenlyCart')) || [];
-            let subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
-            let shipping = parseInt(document.getElementById('shipping').value);
-            document.getElementById('grandTotal').innerText = "Rp " + (subtotal + shipping).toLocaleString();
+        function calcTotal() {
+            const sub = parseInt(localStorage.getItem('tempSub'));
+            const ong = parseInt(document.getElementById('ongkir').value);
+            document.getElementById('totalBayar').innerText = "Rp " + (sub + ong).toLocaleString();
         }
 
-        function removeItem(index) {
+        function delItem(i) {
             let cart = JSON.parse(localStorage.getItem('heavenlyCart'));
-            cart.splice(index, 1);
+            cart.splice(i, 1);
             localStorage.setItem('heavenlyCart', JSON.stringify(cart));
             renderCart();
         }
 
-        function confirmPurchase() {
-            const isSure = confirm("Apakah Anda yakin ingin menyelesaikan pesanan ini?");
-            if(isSure) {
-                alert("Terima kasih! Pesanan Anda sedang diproses. Silakan hubungi admin via WA untuk konfirmasi pembayaran.");
-                localStorage.removeItem('heavenlyCart');
-                window.location.href = 'https://wa.me/628123456789'; // Arahkan ke WA
+        function finalOrder() {
+            if(confirm("Apakah Anda yakin data sudah benar?")) {
+                alert("Pesanan Diterima! Mengarahkan ke WhatsApp Admin...");
+                location.href = "https://wa.me/628123456789";
             }
         }
 
