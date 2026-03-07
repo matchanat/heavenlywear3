@@ -5,115 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heavenly Wear | Elegan & Modern Hijab</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav>
+    <nav class="navbar">
         <div class="logo">Heavenly Wear</div>
         <div class="nav-links">
             <a href="#home">Home</a>
-            <a href="#catalog">Katalog</a>
-            <a href="#analysis">AI Rekomendasi</a>
-            <a href="cart.html" class="cart-btn">🛒 <span id="cart-count">0</span></a>
+            <a href="#catalog">Catalog</a>
+            <a href="#analysis">AI Stylist</a>
+            <a href="cart.html" class="cart-link">
+                <span class="cart-icon">🛒</span>
+                <span id="cart-count" class="cart-badge">0</span>
+            </a>
         </div>
     </nav>
 
     <header id="home" class="hero">
-        <div class="hero-text">
-            <h1>Sempurnakan Hijrahmu</h1>
-            <p>Hijab adalah mahkota setiap muslimah. Temukan kenyamanan dalam balutan bahan premium kami.</p>
-            <a href="#catalog" class="btn-primary">Lihat Koleksi</a>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="sub-title">Premium Hijab Collection</span>
+            <h1>Kecantikan dalam Kesantunan</h1>
+            <p>Hijab adalah mahkota kemuliaan. Temukan koleksi terbaik yang dirancang untuk kenyamanan dan keanggunan Anda setiap hari.</p>
+            <a href="#catalog" class="btn-primary">Explore Collection</a>
         </div>
     </header>
 
     <section class="section education">
-        <h2>Mengapa Berhijab?</h2>
-        <p>Hijab bukan sekadar penutup kepala, ia adalah bentuk ketaatan, perlindungan diri, dan ekspresi kehormatan seorang wanita. Mari mulai langkah kecilmu untuk menutup aurat dengan anggun.</p>
-        <div class="types-grid">
-            <div class="type-card"><h3>Voal</h3><p>Ringan & mudah dibentuk.</p></div>
-            <div class="type-card"><h3>Ceruty</h3><p>Jatuh & mewah untuk pesta.</p></div>
-            <div class="type-card"><h3>Viscose</h3><p>Adem & tekstur unik.</p></div>
+        <div class="container">
+            <div class="edu-grid">
+                <div class="edu-text">
+                    <h2>Arti Sebuah Hijab</h2>
+                    <p>Bagi kami, hijab bukan sekadar penutup aurat. Ia adalah simbol kekuatan, identitas, dan cahaya bagi wanita muslimah. Memakai hijab adalah sebuah ajakan untuk merayakan kehormatan diri dengan cara yang paling indah.</p>
+                    <button class="btn-outline" onclick="window.location.href='https://wa.me/628123456789'">Konsultasi Syari</button>
+                </div>
+                <div class="edu-types">
+                    <div class="type-tag">Voal Premium</div>
+                    <div class="type-tag">Ceruty Baby Doll</div>
+                    <div class="type-tag">Viscose Silk</div>
+                    <div class="type-tag">Jersey Sport</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="analysis" class="section">
-        <div class="ai-card">
-            <div class="ai-header">
-                <div class="ai-badge">Heavenly AI Pro</div>
-                <h2>Analisis Wajah & Undertone</h2>
-                <p>Ambil foto secara langsung atau unggah dari galeri untuk mendapatkan rekomendasi produk yang paling pas untuk Anda.</p>
-            </div>
-    
-            <div class="ai-upload-wrapper">
-                <div class="photo-preview" id="photoPreview">
-                    <div class="placeholder-icon">📷</div>
-                    <p>Belum ada foto terpilih</p>
+    <section id="analysis" class="section ai-section">
+        <div class="container">
+            <div class="ai-card">
+                <div class="ai-info">
+                    <h2>AI Personal Stylist</h2>
+                    <p>Gunakan teknologi AI kami untuk menganalisis bentuk wajah dan undertone kulit Anda secara otomatis.</p>
                 </div>
-    
-                <div class="button-group-ai">
-                    <label for="faceInput" class="btn-ai secondary">
-                        <span class="icon">📁</span> Galeri / Kamera
+                <div class="ai-upload">
+                    <div id="photoPreview" class="preview-box">
+                        <span>Preview Foto</span>
+                    </div>
+                    <div class="upload-controls">
+                        <label for="faceInput" class="btn-upload">Pilih Foto (Galeri/Kamera)</label>
                         <input type="file" id="faceInput" accept="image/*" capture="user" hidden>
-                    </label>
-                    
-                    <button class="btn-ai primary" onclick="startAIAnalysis()" id="analyzeBtn">
-                        Mulai Analisis Cerdas
-                    </button>
+                        <button onclick="startAIAnalysis()" class="btn-analyze">Mulai Analisis</button>
+                    </div>
                 </div>
-            </div>
-    
-            <div id="aiLoader" class="ai-loader" style="display: none;">
-                <div class="progress-bar"></div>
-                <p>Memindai struktur wajah dan undertone kulit...</p>
-            </div>
-    
-            <div id="aiResult" class="ai-result-card" style="display: none;">
-                <div class="result-header">
-                    <span class="status-icon">✨</span>
-                    <h4>Analisis Selesai</h4>
-                </div>
-                <div class="result-body">
-                    <div class="res-item">
-                        <span>Bentuk Wajah:</span>
-                        <strong id="faceShape">-</strong>
-                    </div>
-                    <div class="res-item">
-                        <span>Undertone:</span>
-                        <strong id="skinUndertone">-</strong>
-                    </div>
-                    <div class="recommendation-text">
-                        <p id="aiSuggestion"></p>
-                    </div>
-                    <button class="btn-shop" onclick="location.href='#catalog'">Lihat Produk Rekomendasi</button>
+                <div id="aiLoader" class="loader" style="display:none">Memproses keajaiban...</div>
+                <div id="aiResult" class="result-card" style="display:none">
+                    <div class="result-item"><strong>Bentuk Wajah:</strong> <span id="faceShape"></span></div>
+                    <div class="result-item"><strong>Undertone:</strong> <span id="skinUndertone"></span></div>
+                    <p id="aiSuggestion" class="suggestion"></p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="catalog" class="section">
-        <h2 class="text-center">Koleksi Katalog</h2>
-        <div class="product-grid" id="productGrid">
-            </div>
+        <div class="container">
+            <h2 class="section-title">Exclusive Catalog</h2>
+            <div id="productGrid" class="product-grid"></div>
+        </div>
     </section>
 
-    <section class="section">
-        <h2>Tutorial & Edukasi</h2>
-        <div class="video-scroll">
-            <iframe src="https://www.youtube.com/embed/H2ev9kX3CYA" frameborder="0"></iframe>
-            <iframe src="https://www.youtube.com/embed/-SkMvc0muLY" frameborder="0"></iframe>
-            <iframe src="https://www.youtube.com/embed/WzKlSFJDISA" frameborder="0"></iframe>
+    <section class="section tutorial">
+        <div class="container">
+            <h2>Video Tutorial Edukatif</h2>
+            <div class="video-slider">
+                <iframe src="https://www.youtube.com/embed/H2ev9kX3CYA" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/-SkMvc0muLY" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/WzKlSFJDISA" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <p>Butuh bantuan? <a href="https://wa.me/628123456789" class="wa-btn">Chat Admin (WA)</a></p>
-            <div class="socials">
-                <a href="#">Instagram</a>
-                <a href="#">TikTok</a>
-            </div>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+            <a href="https://wa.me/628123456789">WhatsApp</a>
         </div>
+        <p>&copy; 2026 Heavenly Wear. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
