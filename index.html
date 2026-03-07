@@ -37,13 +37,57 @@
         </div>
     </section>
 
-    <section id="analysis" class="section analysis-box">
-        <h2>AI Personal Stylist</h2>
-        <p>Unggah foto Anda untuk analisis bentuk wajah dan undertone otomatis.</p>
-        <div class="upload-area">
-            <input type="file" id="faceInput" accept="image/*">
-            <button class="btn-secondary" onclick="analyzeFace()">Mulai Analisis</button>
-            <div id="aiResult" class="result-display"></div>
+    <section id="analysis" class="section">
+        <div class="ai-card">
+            <div class="ai-header">
+                <div class="ai-badge">Heavenly AI Pro</div>
+                <h2>Analisis Wajah & Undertone</h2>
+                <p>Ambil foto secara langsung atau unggah dari galeri untuk mendapatkan rekomendasi produk yang paling pas untuk Anda.</p>
+            </div>
+    
+            <div class="ai-upload-wrapper">
+                <div class="photo-preview" id="photoPreview">
+                    <div class="placeholder-icon">📷</div>
+                    <p>Belum ada foto terpilih</p>
+                </div>
+    
+                <div class="button-group-ai">
+                    <label for="faceInput" class="btn-ai secondary">
+                        <span class="icon">📁</span> Galeri / Kamera
+                        <input type="file" id="faceInput" accept="image/*" capture="user" hidden>
+                    </label>
+                    
+                    <button class="btn-ai primary" onclick="startAIAnalysis()" id="analyzeBtn">
+                        Mulai Analisis Cerdas
+                    </button>
+                </div>
+            </div>
+    
+            <div id="aiLoader" class="ai-loader" style="display: none;">
+                <div class="progress-bar"></div>
+                <p>Memindai struktur wajah dan undertone kulit...</p>
+            </div>
+    
+            <div id="aiResult" class="ai-result-card" style="display: none;">
+                <div class="result-header">
+                    <span class="status-icon">✨</span>
+                    <h4>Analisis Selesai</h4>
+                </div>
+                <div class="result-body">
+                    <div class="res-item">
+                        <span>Bentuk Wajah:</span>
+                        <strong id="faceShape">-</strong>
+                    </div>
+                    <div class="res-item">
+                        <span>Undertone:</span>
+                        <strong id="skinUndertone">-</strong>
+                    </div>
+                    <div class="recommendation-text">
+                        <p id="aiSuggestion"></p>
+                    </div>
+                    <button class="btn-shop" onclick="location.href='#catalog'">Lihat Produk Rekomendasi</button>
+                </div>
+            </div>
         </div>
     </section>
 
