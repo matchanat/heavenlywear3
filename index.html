@@ -16,50 +16,59 @@
                 <a href="#home">Home</a>
                 <a href="#analysis">AI Stylist</a>
                 <a href="#catalog">Katalog</a>
-                <a href="#tutorials">Tutorial</a>
-                <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+                <a href="#tutorials">Edukasi</a>
+                <a href="cart.html" class="cart-btn">
+                    🛒 <span id="cart-count">0</span>
+                </a>
             </div>
-            <div class="mobile-toggle" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
     </nav>
 
     <header id="home" class="hero">
-        <div class="container hero-content" data-reveal>
-            <span class="tagline">Premium Collection</span>
-            <h1>Anggun dalam <br>Kesantunan</h1>
-            <p>Sempurnakan gaya hijrahmu dengan sentuhan teknologi AI Stylist dan koleksi hijab premium terbaik.</p>
-            <div class="hero-btns">
-                <a href="#catalog" class="btn primary">Belanja Sekarang</a>
-                <a href="#analysis" class="btn secondary">Cek AI Stylist</a>
+        <div class="container hero-grid">
+            <div class="hero-text" data-reveal>
+                <span class="badge-tag">Brand Lokal Premium</span>
+                <h1>Elegansi Dalam <br>Setiap Lipatan</h1>
+                <p>Temukan gaya hijab yang paling proporsional untuk fitur wajah unik Anda dengan bantuan AI Stylist kami.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn primary">Lihat Koleksi</a>
+                    <a href="#analysis" class="btn secondary">Coba AI Stylist</a>
+                </div>
             </div>
         </div>
     </header>
 
     <section id="analysis" class="section">
         <div class="container">
-            <div class="ai-card" data-reveal>
-                <div class="ai-header">
+            <div class="ai-box" data-reveal>
+                <div class="ai-intro">
                     <h2>AI Personal Stylist</h2>
-                    <p>Teknologi cerdas untuk menentukan gaya hijab paling pas untuk wajah Anda.</p>
+                    <p>Unggah foto wajah untuk rekomendasi model hijab instan.</p>
                 </div>
-                <div class="ai-grid">
-                    <div class="upload-zone">
-                        <div id="photoPreview" class="preview-box">Pratinjau Foto</div>
-                        <label for="faceInput" class="btn-upload">Pilih Galeri / Kamera</label>
-                        <input type="file" id="faceInput" accept="image/*" capture="user" hidden>
-                    </div>
-                    <div class="analysis-zone">
-                        <button class="btn primary full-width" onclick="startAIAnalysis()">Mulai Analisis</button>
-                        <div id="aiLoader" class="loader-box" style="display:none;">
-                            <div class="spinner"></div>
-                            <p>Menganalisis fitur wajah...</p>
+                <div class="ai-main-grid">
+                    <div class="ai-upload">
+                        <div id="photoPreview" class="preview-frame">
+                            <span>Fokus pada wajah</span>
                         </div>
-                        <div id="aiResult" class="result-card" style="display:none;">
-                            <div class="res-item">Bentuk: <strong id="faceShape">-</strong></div>
-                            <div class="res-item">Undertone: <strong id="skinUndertone">-</strong></div>
-                            <p id="aiSuggestion"></p>
+                        <label for="faceInput" class="upload-label">Pilih Foto</label>
+                        <input type="file" id="faceInput" accept="image/*" hidden>
+                    </div>
+                    <div class="ai-result-panel">
+                        <button class="btn primary full-w" onclick="startAIAnalysis()">Analisis Sekarang</button>
+                        <div id="aiLoader" class="loader-wrap" style="display:none">
+                            <div class="dot-spinner"></div>
+                            <p>Menganalisis anatomi wajah...</p>
+                        </div>
+                        <div id="aiResult" class="result-box" style="display:none">
+                            <div class="tag-row">
+                                <span class="tag" id="faceShape">-</span>
+                                <span class="tag" id="skinUndertone">-</span>
+                            </div>
+                            <p id="aiSuggestion" class="sug-text"></p>
                         </div>
                     </div>
                 </div>
@@ -69,46 +78,40 @@
 
     <section id="catalog" class="section">
         <div class="container">
-            <h2 class="section-title" data-reveal>Koleksi Eksklusif</h2>
-            <div id="productGrid" class="product-grid">
-                </div>
+            <h2 class="title-left" data-reveal>Koleksi Hijab</h2>
+            <div id="productGrid" class="catalog-grid"></div>
         </div>
     </section>
 
-    <section id="tutorials" class="section tutorial-gallery">
+    <section id="tutorials" class="section tutorial-section">
         <div class="container">
-            <div class="gallery-header" data-reveal>
-                <span class="badge">Inspirasi Gaya</span>
-                <h2>Edukasi Tutorial Hijab</h2>
-                <p>Geser untuk melihat berbagai teknik styling pashmina dan segiempat.</p>
-            </div>
-            
-            <div class="tutorial-slider">
-                <div class="tuto-card" data-reveal>
-                    <div class="video-box">
+            <h2 class="title-left" data-reveal>Edukasi Tutorial</h2>
+            <div class="tuto-scroll">
+                <div class="tuto-item" data-reveal>
+                    <div class="v-frame">
                         <iframe src="https://www.youtube.com/embed/H2ev9kX3CYA" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="tuto-info">
-                        <span>Pashmina Viscose</span>
-                        <h3>Style Gen-Z Printed</h3>
+                    <div class="v-meta">
+                        <h4>Pashmina Viscose</h4>
+                        <p>Style Gen-Z Printed</p>
                     </div>
                 </div>
-                <div class="tuto-card" data-reveal>
-                    <div class="video-box">
+                <div class="tuto-item" data-reveal>
+                    <div class="v-frame">
                         <iframe src="https://www.youtube.com/embed/-SkMvc0muLY" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="tuto-info">
-                        <span>Segiempat Paris</span>
-                        <h3>8 Gaya Daily Simple</h3>
+                    <div class="v-meta">
+                        <h4>Segiempat Paris</h4>
+                        <p>8 Daily Simple Style</p>
                     </div>
                 </div>
-                <div class="tuto-card" data-reveal>
-                    <div class="video-box">
+                <div class="tuto-item" data-reveal>
+                    <div class="v-frame">
                         <iframe src="https://www.youtube.com/embed/WzKlSFJDISA" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="tuto-info">
-                        <span>Pashmina Ceruty</span>
-                        <h3>One Jarum Elegant Style</h3>
+                    <div class="v-meta">
+                        <h4>Pashmina Ceruty</h4>
+                        <p>One Jarum Elegant</p>
                     </div>
                 </div>
             </div>
@@ -116,7 +119,7 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2026 Heavenly Wear. Elegansi dalam Kesantunan.</p>
+        <p>&copy; 2026 Heavenly Wear. Made with Elegance.</p>
     </footer>
 
     <script src="script.js"></script>
