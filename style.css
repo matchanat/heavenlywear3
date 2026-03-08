@@ -47,6 +47,100 @@ body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(-
 .mobile-menu { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
 .mobile-menu span { width: 25px; height: 3px; background: var(--dark-pink); }
 
+/* Tutorial Section Styling */
+.tutorial-section {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 60px 0;
+}
+
+.title-center {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Horizontal Scroll Logic */
+.video-scroll-container {
+    display: flex;
+    overflow-x: auto; /* Mengaktifkan geser horizontal */
+    gap: 25px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory; /* Membuat scroll terasa magnetis */
+    scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+    -ms-overflow-style: none; /* Sembunyikan scrollbar di IE/Edge */
+}
+
+.video-scroll-container::-webkit-scrollbar {
+    display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+}
+
+/* Video Card Styling */
+.video-card {
+    min-width: 320px; /* Ukuran pas untuk Mobile */
+    max-width: 400px;
+    background: var(--white);
+    border-radius: 25px;
+    overflow: hidden;
+    scroll-snap-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    flex-shrink: 0; /* Mencegah card menciut */
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 177.77%; /* Rasio 9:16 untuk video portrait/shorts style */
+    height: 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--dark-pink);
+}
+
+.video-info p {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.4;
+}
+
+/* Scroll Hint (Mobile) */
+.scroll-hint {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: var(--dark-pink);
+    opacity: 0.7;
+    display: block;
+}
+
+/* Penyesuaian Desktop */
+@media (min-width: 992px) {
+    .video-card {
+        min-width: 350px; /* Sedikit lebih lebar di desktop */
+    }
+    .scroll-hint {
+        display: none; /* Sembunyikan petunjuk di desktop karena scrollbar terlihat atau user pakai mouse */
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .hero-grid, .ai-content-grid { grid-template-columns: 1fr; text-align: center; }
