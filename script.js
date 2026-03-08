@@ -1,4 +1,4 @@
-// Database Produk Lokal
+// Data Produk
 const products = [
     { id: 1, name: "Hijab Sport Premium", price: 40000, img: "image/hijab-sport.jpeg" },
     { id: 2, name: "Segi Empat Voal", price: 35000, img: "image/segiempat-voal.jpeg" },
@@ -7,72 +7,61 @@ const products = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts();
-    initReveal();
-    handlePhotoPreview();
-});
-
-// Toggle Menu Mobile
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-}
-
-// Render Produk ke UI
-function renderProducts() {
+    // 1. Render Catalog
     const grid = document.getElementById('productGrid');
-    if(!grid) return;
-    grid.innerHTML = products.map(p => `
-        <div class="product-card" data-reveal>
-            <img src="${p.img}" alt="${p.name}">
-            <h3 style="margin-top:15px; font-size:1.1rem;">${p.name}</h3>
-            <p style="color:var(--primary); font-weight:700;">Rp ${p.price.toLocaleString()}</p>
-            <button class="btn secondary" style="margin-top:10px; width:100%;" onclick="addToCart(${p.id})">Tambah Keranjang</button>
-        </div>
-    `).join('');
-}
+    if(grid) {
+        grid.innerHTML = products.map(p => `
+            <div class="product-card" data-reveal>
+                <img src="${p.img}" alt="${p.name}">
+                <h4 style="margin: 15px 0 5px;">${p.name}</h4>
+                <p style="color: var(--primary); font-weight:700;">Rp ${p.price.toLocaleString()}</p>
+                <button class="btn primary full-w" style="margin-top:10px; font-size:0.8rem" onclick="addToCart(${p.id})">Tambah</button>
+            </div>
+        `).join('');
+    }
 
-// Animasi Muncul Saat Scroll
-function initReveal() {
+    // 2. Reveal Animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
-}
 
-// Handle Preview Foto AI
-function handlePhotoPreview() {
+    // 3. AI Photo Preview
     const input = document.getElementById('faceInput');
-    input.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                document.getElementById('photoPreview').innerHTML = `<img src="${event.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    if(input) {
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    document.getElementById('photoPreview').innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }
+});
+
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
 }
 
-// AI Analysis Logic
 function startAIAnalysis() {
     const input = document.getElementById('faceInput');
-    if(!input.files[0]) return alert("Silakan pilih foto dulu ya Sis!");
+    if(!input.files[0]) return alert("Pilih foto wajah dulu Sis ✨");
 
     document.getElementById('aiLoader').style.display = "block";
     document.getElementById('aiResult').style.display = "none";
 
     setTimeout(() => {
-        const isOval = input.files[0].name.length % 2 === 0;
-        document.getElementById('faceShape').innerText = isOval ? "Oval" : "Bulat";
-        document.getElementById('skinUndertone').innerText = isOval ? "Cool Tone" : "Warm Tone";
-        document.getElementById('aiSuggestion').innerText = isOval ? 
-            "Pashmina lilit leher sangat cocok untuk mempertegas dagu Anda." : 
-            "Segiempat dengan lipatan dahi tegak akan memberikan kesan wajah lebih tirus.";
+        const nameLen = input.files[0].name.length;
+        document.getElementById('faceShape').innerText = nameLen % 2 === 0 ? "Oval" : "Round";
+        document.getElementById('skinUndertone').innerText = nameLen % 3 === 0 ? "Cool Tone" : "Warm Tone";
+        document.getElementById('aiSuggestion').innerText = "Berdasarkan analisis AI, gaya Pashmina dengan lilitan leher akan memberikan kesan wajah lebih jenjang dan elegan.";
         
         document.getElementById('aiLoader').style.display = "none";
         document.getElementById('aiResult').style.display = "block";
-    }, 2500);
+    }, 2000);
 }
 
 function addToCart(id) {
@@ -80,5 +69,5 @@ function addToCart(id) {
     cart.push(id);
     localStorage.setItem('heavenlyCart', JSON.stringify(cart));
     document.getElementById('cart-count').innerText = cart.length;
-    alert("Produk berhasil ditambah! ✨");
+    alert("Berhasil masuk keranjang! 💖");
 }
