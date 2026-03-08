@@ -1,153 +1,339 @@
+/* HEAVENLY WEAR - PREMIUM STYLE GUIDE
+   Colors: Rose Quartz (#FCE4EC), Serenity Blue (#E3F2FD), Deep Pink (#F06292)
+   Design: Glassmorphism & Responsive Mobile-First
+*/
+
 :root {
     --pink: #FCE4EC;
     --dark-pink: #F06292;
     --blue: #E3F2FD;
     --deep-blue: #1E88E5;
-    --text: #333;
-    --white: #fff;
+    --white-glass: rgba(255, 255, 255, 0.75);
+    --text-main: #333333;
+    --text-muted: #666666;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-* { margin:0; padding:0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
-
-.container { width: 90%; max-width: 1200px; margin: 0 auto; }
-
-/* Navbar */
-.navbar { padding: 20px 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); position: sticky; top:0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--dark-pink); font-weight: 700; }
-.nav-links a { text-decoration: none; color: var(--text); margin-left: 25px; font-weight: 500; font-size: 0.9rem; }
-
-/* Hero */
-.hero { padding: 100px 0; background: linear-gradient(135deg, var(--pink), var(--blue)); min-height: 80vh; display: flex; align-items: center; }
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-.hero-text h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
-.tagline { color: var(--dark-pink); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
-.hero-btns { display: flex; gap: 15px; margin-top: 30px; }
-
-/* AI Section */
-.section { padding: 80px 0; }
-.ai-card { background: var(--blue); border-radius: 30px; padding: 40px; }
-.ai-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
-.preview-square { width: 100%; aspect-ratio: 1/1; background: white; border-radius: 20px; border: 2px dashed var(--dark-pink); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; }
-
-/* Catalog */
-.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-.product-card { background: white; border-radius: 20px; padding: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: 0.3s; cursor: pointer; border: 1px solid #f0f0f0; }
-.product-card:hover { transform: translateY(-10px); }
-.product-card img { width: 100%; height: 320px; object-fit: cover; border-radius: 15px; }
-
-/* Buttons */
-.btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
-.btn.primary { background: var(--dark-pink); color: white; }
-.btn.secondary { background: white; color: var(--dark-pink); }
-.btn-outline { display: block; text-align: center; padding: 10px; border: 1px solid var(--dark-pink); border-radius: 10px; color: var(--dark-pink); cursor: pointer; }
-
-/* Mobile Menu */
-.mobile-menu { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.mobile-menu span { width: 25px; height: 3px; background: var(--dark-pink); }
-
-/* Tutorial Section Styling */
-.tutorial-section {
-    background: rgba(255, 255, 255, 0.4);
-    padding: 60px 0;
+/* 1. RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.title-center {
-    text-align: center;
-    margin-bottom: 40px;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-main);
+    background: linear-gradient(135deg, var(--pink) 0%, var(--blue) 100%);
+    background-attachment: fixed;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .logo {
     font-family: 'Playfair Display', serif;
 }
 
-/* Horizontal Scroll Logic */
-.video-scroll-container {
-    display: flex;
-    overflow-x: auto; /* Mengaktifkan geser horizontal */
-    gap: 25px;
-    padding: 20px 0;
-    scroll-snap-type: x mandatory; /* Membuat scroll terasa magnetis */
-    scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
-    -ms-overflow-style: none; /* Sembunyikan scrollbar di IE/Edge */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.video-scroll-container::-webkit-scrollbar {
-    display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+.section {
+    padding: 80px 0;
 }
 
-/* Video Card Styling */
-.video-card {
-    min-width: 320px; /* Ukuran pas untuk Mobile */
-    max-width: 400px;
-    background: var(--white);
-    border-radius: 25px;
-    overflow: hidden;
-    scroll-snap-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    transition: 0.3s;
-    flex-shrink: 0; /* Mencegah card menciut */
-}
-
-.video-card:hover {
-    transform: translateY(-5px);
-}
-
-.video-wrapper {
-    position: relative;
-    padding-bottom: 177.77%; /* Rasio 9:16 untuk video portrait/shorts style */
-    height: 0;
-}
-
-.video-wrapper iframe {
-    position: absolute;
+/* 2. NAVIGATION (GLASSMORPHISM) */
+.navbar {
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    z-index: 2000;
+    background: var(--white-glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 15px 0;
 }
 
-.video-info {
-    padding: 20px;
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.video-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--dark-pink);
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    margin-left: 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
     color: var(--dark-pink);
 }
 
-.video-info p {
-    font-size: 0.85rem;
-    color: #777;
-    line-height: 1.4;
+/* 3. HERO SECTION */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
 }
 
-/* Scroll Hint (Mobile) */
-.scroll-hint {
-    text-align: center;
-    margin-top: 15px;
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.tagline {
+    color: var(--dark-pink);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     font-size: 0.8rem;
-    color: var(--dark-pink);
-    opacity: 0.7;
     display: block;
+    margin-bottom: 15px;
 }
 
-/* Penyesuaian Desktop */
-@media (min-width: 992px) {
-    .video-card {
-        min-width: 350px; /* Sedikit lebih lebar di desktop */
-    }
-    .scroll-hint {
-        display: none; /* Sembunyikan petunjuk di desktop karena scrollbar terlihat atau user pakai mouse */
-    }
+.hero-text h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: #222;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .hero-grid, .ai-content-grid { grid-template-columns: 1fr; text-align: center; }
-    .hero-text h1 { font-size: 2.2rem; }
+.hero-btns {
+    display: flex;
+    gap: 20px;
+}
+
+/* 4. BUTTONS */
+.btn {
+    padding: 14px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.4s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn.primary {
+    background: var(--dark-pink);
+    color: white;
+    box-shadow: 0 10px 20px rgba(240, 98, 146, 0.25);
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(240, 98, 146, 0.4);
+}
+
+.btn.secondary {
+    background: white;
+    color: var(--dark-pink);
+    border: 1px solid var(--dark-pink);
+}
+
+.btn.secondary:hover {
+    background: var(--dark-pink);
+    color: white;
+}
+
+/* 5. AI STYLIST SECTION */
+.ai-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-soft);
+}
+
+.ai-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.preview-square {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #fff;
+    border-radius: 30px;
+    border: 2px dashed var(--dark-pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 6. CATALOG GRID */
+.title-center {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: var(--white-glass);
+    border-radius: 30px;
+    padding: 20px;
+    transition: 0.4s;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    background: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+/* 7. TUTORIAL GALLERY (IMPROVED) */
+.tutorial-gallery {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.badge {
+    background: var(--dark-pink);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tutorial-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 20px 0 40px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.tutorial-slider::-webkit-scrollbar { display: none; }
+
+.tuto-card {
+    min-width: 320px;
+    background: white;
+    border-radius: 35px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: 0.4s;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 160%; /* Rasio portrait elegan */
+    height: 0;
+    background: #eee;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.tuto-detail {
+    padding: 25px;
+}
+
+.tuto-tag {
+    color: var(--dark-pink);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* 8. MOBILE RESPONSIVE */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.mobile-menu span {
+    width: 28px;
+    height: 3px;
+    background: var(--dark-pink);
+    border-radius: 2px;
+}
+
+@media (max-width: 992px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-text h1 { font-size: 2.8rem; }
     .hero-btns { justify-content: center; }
-    .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: white; flex-direction: column; padding: 20px; text-align: center; box-shadow: 0 10px 10px rgba(0,0,0,0.1); }
+    .ai-content-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    
     .nav-links.active { display: flex; }
-    .nav-links a { margin: 10px 0; }
+    .nav-links a { margin: 15px 0; font-size: 1.1rem; }
     .mobile-menu { display: flex; }
+    
+    .tuto-card { min-width: 280px; }
+}
+
+/* 9. FOOTER */
+.footer {
+    padding: 60px 0;
+    background: var(--white-glass);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
